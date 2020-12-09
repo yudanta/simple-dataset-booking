@@ -1,0 +1,16 @@
+Flask
+Flask-Bcrypt
+Flask-Cors
+Flask-JWT-Extended
+Flask-Login
+Flask-Migrate
+Flask-Script
+Flask-SQLAlchemy
+Flask-WTF
+aniso8601==7.0.0
+ansicolor==0.2.6
+ansicolors==1.1.8
+gunicorn
+gevent
+requests
+rfc3339

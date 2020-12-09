@@ -1,0 +1,125 @@
+{% extends 'cms/base.html' %} {% block title %}
+<title>Tasks - {{ config['APP_NAME'] }}</title>
+{% endblock %} {% block body %}
+<!-- PAGE CONTENT-->
+<div class="page-content--bgf7">
+    <!-- BREADCRUMB-->
+    <section class="au-breadcrumb2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                        <div class="au-breadcrumb-left">
+                            <span class="au-breadcrumb-span">You are here:</span>
+                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                <li class="list-inline-item active">
+                                    <a href="{{ url_for('dashboard.index') }}"><i class="fas fa-home"></i></a>
+                                </li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="{{ url_for('tasks.index') }}">Your Booked Datasets</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END BREADCRUMB-->
+
+    <!-- DATA TABLE-->
+    <section class="p-t-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title-5 m-b-35">List Datasets</h3>
+
+                    <div class="alert-wrapper">
+                        {% for category, message in get_flashed_messages(with_categories=true) %} {% if category in ['failed-confirm']%}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                        </div>
+                        {% elif category == 'success-confirm' %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                        </div>
+                        {% endif %} {% endfor %}
+                    </div>
+
+                    <div id="accordion">
+                        <div class="text-left" style="margin-bottom: 10px;">
+                            <a href="{{ url_for('tasks.booking') }}"><button class="btn btn-info">Add new Booking</button></a>
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-light" style="font-size:13px">
+                            <thead>
+                                <tr>
+                                    <th>Booking Id</th>
+                                    <th>Dataset Name</th>
+                                    <th>Dataset Description</th>
+                                    <th>You Booked At</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if data.booked_datasets.__len__() == 0 %}
+                                <tr>
+                                    <td class="text-center" colspan="14">No Data</td>
+                                </tr>
+                                {% endif %} {% for task in data.booked_datasets %}
+                                <tr>
+                                    <td>{{ task.id }}</td>
+                                    <td>{{ task.dataset.name }}</td>
+                                    <td>{{ task.dataset.description }}</td>
+                                    <td>{{ task.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                    <td>{{ 'Active' if task.is_deleted == 0 else 'Inactive' }}</td>
+                                    <td style="line-height:34px">
+                                        <a href="{{ url_for('tasks.download', task_id=task.id) }}" target="_blank">Download Dataset</a> |
+                                        <a href="{{ url_for('tasks.revoke', task_id=task.id) }}">Revoke Booking</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="m-t-30">
+                        <ul class="pagination justify-content-center">
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END DATA TABLE-->
+
+    <hr class="m-t-50">
+
+    <!-- Footer -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright ">
+                    <p>Copyright © 2020 Ydn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer-->
+
+</div>
+{% endblock %} {% block js %} {% endblock %}

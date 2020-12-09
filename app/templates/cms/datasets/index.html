@@ -1,0 +1,124 @@
+{% extends 'cms/base.html' %} {% block title %}
+<title>Datasets - {{ config['APP_NAME'] }}</title>
+{% endblock %} {% block body %}
+<!-- PAGE CONTENT-->
+<div class="page-content--bgf7">
+    <!-- BREADCRUMB-->
+    <section class="au-breadcrumb2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                        <div class="au-breadcrumb-left">
+                            <span class="au-breadcrumb-span">You are here:</span>
+                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                <li class="list-inline-item active">
+                                    <a href="{{ url_for('dashboard.index') }}"><i class="fas fa-home"></i></a>
+                                </li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="{{ url_for('datasets.index') }}">Datasets</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END BREADCRUMB-->
+
+    <!-- DATA TABLE-->
+    <section class="p-t-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title-5 m-b-35">Your uploaded datasets</h3>
+
+                    <div class="alert-wrapper">
+                        {% for category, message in get_flashed_messages(with_categories=true) %} {% if category in ['failed-confirm']%}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                        </div>
+                        {% elif category == 'success-confirm' %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                        </div>
+                        {% endif %} {% endfor %}
+                    </div>
+
+                    <div id="accordion">
+                        <div class="text-left" style="margin-bottom: 10px;">
+                            <a href="{{ url_for('datasets.add') }}"><button class="btn btn-info">Add new Dataset</button></a>
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-light" style="font-size:13px">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Uploaded At</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if data.datasets.__len__() == 0 %}
+                                <tr>
+                                    <td class="text-center" colspan="14">No Data</td>
+                                </tr>
+                                {% endif %} {% for dataset in data.datasets %}
+                                <tr>
+                                    <td>{{ dataset.id }}</td>
+                                    <td>{{ dataset.name }}</td>
+                                    <td>{{ dataset.description }}</td>
+                                    <td>{{ dataset.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                    <td>{{ 'Active' if dataset.status == 1 else 'Inactive' }}</td>
+                                    <td style="line-height:34px">
+                                        <a href="{{ url_for('datasets.delete', dataset_id=dataset.id) }}">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="m-t-30">
+                        <ul class="pagination justify-content-center">
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END DATA TABLE-->
+
+    <hr class="m-t-50">
+
+    <!-- Footer -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright ">
+                    <p>Copyright © 2020 Ydn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer-->
+
+</div>
+{% endblock %} {% block js %} {% endblock %}

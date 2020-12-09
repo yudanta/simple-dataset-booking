@@ -1,0 +1,64 @@
+{% extends 'cms/base.html' %} {% block title %}
+<title>Book Datasets - {{ config['APP_NAME'] }}</title>
+{% endblock %} {% block body %}
+<div class="page-content--bgf7">
+    <!-- START FORM-->
+    <section class="p-t-20">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 m-b-35">
+                    <h3 class="title-5 m-b-20">Booking</h3>
+                    <p>Booking New Datasets</p>
+                </div>
+
+                <div class="col-md-6">
+
+                    {% if form.errors %}
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <strong>Upload new dataset failed!</strong> {% for field, errors in form.errors.items() %}
+                        <li>{{ form[field].label }}: {{ ', '.join(errors) }}</li>
+                        {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                    {% endif %}
+
+                    <form class="form-horizontal" method="post" action='{{ url_for("tasks.booking") }}'>
+                        {{ form.csrf_token }}
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="font-weight-normal">Please select datasets (multiple select allowed)</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="Name">Datasets Lists</label> {{ form.datasets(class_="checkbox-inline list-unstyled") }}
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="m-t-30 ">
+                            {{ form.submit(class_="btn btn-primary btn-lg btn-block ") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END FORM-->
+
+    <hr class="m-t-50 ">
+
+    <!-- Footer -->
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class="copyright ">
+                    <p>Copyright © 2020 Ydn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer-->
+
+</div> {% endblock %}

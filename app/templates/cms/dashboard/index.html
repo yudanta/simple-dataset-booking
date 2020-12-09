@@ -1,0 +1,99 @@
+{% extends 'cms/base.html' %} {% block title %}
+<title>Dashboard - {{ config['APP_NAME'] }}</title>
+{% endblock %} {% block body %}
+<!-- PAGE CONTENT-->
+<div class="page-content--bgf7">
+    <!-- BREADCRUMB-->
+    <section class="au-breadcrumb2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                        <div class="au-breadcrumb-left">
+                            <span class="au-breadcrumb-span">You are here:</span>
+                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                <li class="list-inline-item active">
+                                    <a href="{{ url_for('dashboard.index') }}"><i class="fas fa-home"></i></a>
+                                </li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="{{ url_for('dashboard.index') }}">Dashboard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END BREADCRUMB-->
+
+    <!-- WELCOME-->
+    <section class="welcome p-t-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="title-4">Welcome back,
+                        <span>{{ data.logged_in_user.username }}!</span>
+                    </h1>
+                    <hr class="line-seprate">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END WELCOME-->
+
+    <!-- STATISTIC-->
+    <section class="statistic statistic2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="statistic__item" style="background:#e42626">
+                        <h2 class="number">{{data.active_datasets}}</h2>
+                        <span class="desc">Total available datasets</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-account"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="statistic__item" style="background: #2c6936">
+                        <h2 class="number">{{data.active_task_booking}}</h2>
+                        <span class="desc">Active Bookings</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="statistic__item" style="background: #e29200">
+                        <h2 class="number">{{data.active_users}}</h2>
+                        <span class="desc">Total Active Users</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-info"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- END STATISTIC-->
+
+    <hr class="m-t-50">
+
+    <!-- Footer -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="copyright ">
+                    <p>Copyright © 2020 Ydn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer-->
+
+</div>
+{% endblock %} {% block js %} {% endblock %}
