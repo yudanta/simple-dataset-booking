@@ -119,7 +119,7 @@ dmypy.json
 .vscode/
 
 # ignore config
-config.py
+# config.py
 
 # OSX DS Store file
 .DS_Store
