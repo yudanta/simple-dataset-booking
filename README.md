@@ -11,7 +11,7 @@ This project, allows users to upload a datasets in a .zip file, after then user 
 ## to run this project or to deploy with docker
 ### clone to your local directory
 ```
-git clone [git@github.com:yudanta/simple-dataset-booking.git](https://github.com/yudanta/simple-dataset-booking.git)
+git clone https://github.com/yudanta/simple-dataset-booking.git
 ```
 ### local via venv 
 ```
@@ -38,7 +38,7 @@ python dbmigration.py do_seed_user
 # run directly using python3 
 python3 run.py
 
-# run from uwsgi 
+# run from gunicorn 
 gunicorn app:app 
 ```
 
