@@ -17,7 +17,8 @@ SECRET_KEY = 'ca2b84ac72a91a20cbda828a2be2d1f2c1fb7521'
 secure_scheme_headers = {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
 
 # SQLALCHEMY CONFIG
-SQLALCHEMY_DATABASE_URI = 'sqlite:///home/fortress/src/murakami_test.db'
+DB_PATH = os.path.join(BASEDIR, 'murakami_test.db')
+SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(DB_PATH)
 DATABASE_CONNECT_OPTIONS = {}
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SQLALCHEMY_ECHO = True
